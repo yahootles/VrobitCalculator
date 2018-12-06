@@ -34,6 +34,8 @@ public class VrobitCalculatorForm extends javax.swing.JFrame {
         promptLabel = new javax.swing.JLabel();
         vrobitTextField = new javax.swing.JTextField();
         enterButton = new javax.swing.JButton();
+        errorLabel = new javax.swing.JLabel();
+        outputLabel = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -58,6 +60,12 @@ public class VrobitCalculatorForm extends javax.swing.JFrame {
             }
         });
 
+        errorLabel.setForeground(new java.awt.Color(255, 0, 0));
+        errorLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+
+        outputLabel.setFont(new java.awt.Font("SerifaDEELig", 0, 14)); // NOI18N
+        outputLabel.setForeground(new java.awt.Color(51, 255, 51));
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -65,15 +73,21 @@ public class VrobitCalculatorForm extends javax.swing.JFrame {
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(promptLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(vrobitTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(enterButton)
-                        .addGap(0, 53, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                        .addComponent(errorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(38, 38, 38))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(outputLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(titleLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createSequentialGroup()
+                                .addComponent(promptLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(vrobitTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(enterButton)
+                                .addGap(0, 261, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,7 +99,11 @@ public class VrobitCalculatorForm extends javax.swing.JFrame {
                     .addComponent(promptLabel)
                     .addComponent(vrobitTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(enterButton))
-                .addContainerGap(205, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(errorLabel)
+                .addGap(36, 36, 36)
+                .addComponent(outputLabel)
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         jMenu1.setText("File");
@@ -114,9 +132,28 @@ public class VrobitCalculatorForm extends javax.swing.JFrame {
         String input = vrobitTextField.getText();
         try{
             int vrobits = Integer.parseInt(input);
+            errorLabel.setText("");
+            
+            int drobzits = (int)vrobits/(int)100000;
+            vrobits = vrobits%100000;
+
+            int clickwits = (int)vrobits/(int)50000;
+            vrobits = vrobits%50000;
+            
+            int gazoontights = (int)vrobits/(int)10000;
+            vrobits = vrobits%10000;
+            
+            int frazoints = (int)vrobits/(int)1000;
+            vrobits = vrobits%1000;
+            
+            int blointoits = (int)vrobits/(int)500;
+            vrobits = vrobits%500;
+            
+            outputLabel.setText("You have " + drobzits + " drobzits, " + clickwits + " clickwits, " + gazoontights + " gazoontights, " + frazoints + " frazoints, " + blointoits + " blointoits and " + vrobits + " vrobits.");
         }catch(NumberFormatException nfe){
             System.out.println("An invalid input was entered.");
             System.err.println(nfe);
+            errorLabel.setText("That is not a valid input. Please enter an integer.");
         }
     }//GEN-LAST:event_enterButtonActionPerformed
 
@@ -157,11 +194,13 @@ public class VrobitCalculatorForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton enterButton;
+    private javax.swing.JLabel errorLabel;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JLabel outputLabel;
     private javax.swing.JLabel promptLabel;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JTextField vrobitTextField;
